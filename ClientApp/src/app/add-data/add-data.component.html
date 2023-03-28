@@ -1,0 +1,48 @@
+<mat-tab-group dynamicHeight mat-stretch-tabs="true">
+    <mat-tab label="Add location">
+        <form [formGroup]="addLocationForm" (ngSubmit)="onLocationSubmit()">
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="addLocation">
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" type="submit">Add location</button>
+            </div>
+        </form>
+    </mat-tab>
+    <mat-tab label="Add weather data">
+        <form [formGroup]="weatherDataForm" (ngSubmit)="onWeatherSubmit()">
+            <div class="vertical">
+                <mat-form-field appearance="fill">
+                    <mat-label>Location</mat-label>
+                    <mat-select formControlName="weatherLocation">
+                        <mat-option *ngFor="let location of locations" [value]="location">{{ location.name | titlecase }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Temperature</mat-label>
+                    <input matInput formControlName="temperature" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Windspeed</mat-label>
+                    <input matInput formControlName="windSpeed">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Rain amount</mat-label>
+                    <input matInput formControlName="rainAmountMM">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Date</mat-label>
+                    <input matInput readonly (click)="picker.open()" [matDatepicker]="picker" formControlName="date">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" type="submit">Add weather</button>
+            </div>
+        </form>
+    </mat-tab>
+</mat-tab-group>

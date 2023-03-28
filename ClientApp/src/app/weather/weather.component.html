@@ -1,0 +1,36 @@
+<h2>Locations</h2>
+<div *ngFor="let location of locations">
+    <mat-card class="mat-card" *ngIf="location.weather.length > 0">
+        <mat-card-header>
+            <mat-card-title>
+                {{ location.name | titlecase }}
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{ location.weather[0].date | date:'mediumDate' }}
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-grid-list [cols]="3" rowHeight="30">
+                <mat-grid-tile-header>
+                    <mat-grid-tile>Temperature</mat-grid-tile>
+                    <mat-grid-tile>Wind</mat-grid-tile>
+                    <mat-grid-tile>Rain</mat-grid-tile>
+                </mat-grid-tile-header>
+                <mat-grid-tile>
+                    {{ location.weather[0].temperature }}&deg;C
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    {{ location.weather[0].windSpeed }} m/s
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    {{ location.weather[0].rainAmountMM }} mm
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card-content>
+        <mat-card-footer>
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" [routerLink]="['/weather-detail/', location.id]">Past weather</button>
+            </mat-card-actions>
+        </mat-card-footer>
+    </mat-card>
+</div>
